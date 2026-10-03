@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="el"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Υπολογισμός κληρονομικής μερίδας χωρίς διαθήκη | Εξ αδιαθέτου διαδοχή και νόμιμη μοίρα</title>
+<meta name="description" content="Δωρεάν υπολογιστής κληρονομικής μερίδας: βάλε σύζυγο, παιδιά, γονείς, αδέλφια και δες πόσο κληρονομεί ο καθένας κατά τον Αστικό Κώδικα, μαζί με τη νόμιμη μοίρα.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Πόσο κληρονομεί ο σύζυγος όταν δεν υπάρχει διαθήκη;","acceptedAnswer":{"@type":"Answer","text":"Το ένα τέταρτο της κληρονομίας όταν συντρέχει με παιδιά και το ένα δεύτερο όταν συντρέχει με γονείς, αδέλφια ή άλλους συγγενείς (άρθρο 1820 ΑΚ)."}},{"@type":"Question","name":"Τι είναι η νόμιμη μοίρα;","acceptedAnswer":{"@type":"Answer","text":"Είναι το μισό της εξ αδιαθέτου μερίδας που δικαιούνται παιδιά, γονείς και σύζυγος, ακόμη και αν υπάρχει διαθήκη που τους αποκλείει (άρθρο 1825 ΑΚ)."}}]}</script>
+<style>
+:root{--bg:#eef1f5;--fg:#1b2733;--mut:#55636f;--card:#fff;--line:#c9d2db;--nv:#0b3d7a;--nv2:#e6eef8;--af:#fff;--ok:#0a6b3d;--in:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1620;--fg:#e8eef4;--mut:#9aabba;--card:#15212d;--line:#2b3c4b;--nv:#7db3ff;--nv2:#1a2b3d;--af:#06152a;--ok:#5fd394;--in:#0d1620}}
+:root[data-theme="dark"]{--bg:#0d1620;--fg:#e8eef4;--mut:#9aabba;--card:#15212d;--line:#2b3c4b;--nv:#7db3ff;--nv2:#1a2b3d;--af:#06152a;--ok:#5fd394;--in:#0d1620}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+header{background:var(--nv);color:var(--af);border-bottom:4px solid #6fa3e0}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+header .wrap{padding:16px}header h1{font-size:1.55rem;line-height:1.25;margin:0 0 4px}header p{margin:0;opacity:.92}
+main{padding:20px 0 40px}
+.panel{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--nv);padding:18px;margin-bottom:18px}
+h2{font-size:1.25rem;color:var(--nv);margin:0 0 10px}h3{font-size:1.05rem;margin:14px 0 6px}
+.step{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line)}.step:first-of-type{border-top:0}
+.no{flex:none;width:32px;height:32px;border-radius:50%;background:var(--nv);color:var(--af);display:grid;place-items:center;font-weight:700}
+.sb{flex:1;min-width:0}.sb b{display:block;margin-bottom:6px}
+label{display:block;color:var(--mut);font-size:.95rem}
+input[type=number]{width:110px;padding:9px;font:inherit;border:2px solid var(--line);background:var(--in);color:var(--fg);border-radius:4px;margin-left:8px}
+input:focus,button:focus,summary:focus{outline:3px solid #f0a500;outline-offset:1px}
+.opt{display:flex;gap:16px;flex-wrap:wrap}.opt label{color:var(--fg);display:flex;align-items:center;gap:8px;padding:8px 12px;border:2px solid var(--line);border-radius:4px;cursor:pointer;background:var(--in)}
+.opt input{width:20px;height:20px;margin:0}
+.bt{font:inherit;padding:10px 18px;border:2px solid var(--nv);background:var(--nv);color:var(--af);border-radius:4px;cursor:pointer;font-weight:600;margin:4px 8px 4px 0}
+.bt.s{background:transparent;color:var(--nv)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0;padding:8px;background:var(--nv2);border-radius:4px}
+.hint{font-size:.9rem;color:var(--mut);margin:4px 0 0}
+table{width:100%;border-collapse:collapse;margin:10px 0}th{background:var(--nv2);color:var(--nv)}
+th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}.n{text-align:right;white-space:nowrap}
+.bar{height:10px;background:var(--nv2);border-radius:5px;min-width:70px}.bar i{display:block;height:100%;background:var(--nv);border-radius:5px}
+.w{overflow-x:auto}
+.alert{border-left:6px solid #d68a00;background:var(--nv2);padding:12px 14px;margin:12px 0}
+.ok{color:var(--ok);font-weight:600}
+details{border:1px solid var(--line);margin:8px 0;background:var(--card)}summary{padding:12px 14px;cursor:pointer;font-weight:600;color:var(--nv)}details p{margin:0;padding:0 14px 14px}
+footer{background:var(--nv);color:var(--af);padding:20px 0;font-size:.9rem}footer p{margin:6px 0}
+@media print{header,.np,footer{display:none!important}body{background:#fff;color:#000}.panel{border:1px solid #999}}
+header nav{margin-bottom:8px}header nav a{color:var(--af);margin-right:16px;font-size:.95rem;text-decoration:underline}
+</style></head><body>
+<header><div class="wrap"><nav><a href="../">Αρχική</a><a href="../kleronomika/">Κληρονομικά</a><a href="../ylika-anakainisis/">Υλικά ανακαίνισης</a></nav><h1>Υπολογισμός κληρονομικής μερίδας</h1><p>Εξ αδιαθέτου διαδοχή και νόμιμη μοίρα, βήμα προς βήμα, με βάση τον Αστικό Κώδικα.</p></div></header>
+<main class="wrap">
+<section class="panel np" id="form"><h2>Συμπλήρωσε τα στοιχεία της οικογένειας</h2>
+<p class="hint">Δώσε τα στοιχεία του προσώπου που απεβίωσε και δεν άφησε διαθήκη. Δεν αποθηκεύουμε τίποτα.</p>
+<div class="step"><div class="no">1</div><div class="sb"><b>Άφησε επιζώντα σύζυγο;</b><div class="opt"><label><input type="radio" name="sp" value="1">Ναι</label><label><input type="radio" name="sp" value="0" checked>Όχι</label></div></div></div>
+<div class="step"><div class="no">2</div><div class="sb"><b>Παιδιά</b><label>Παιδιά που ζουν<input type="number" id="ch" min="0" max="30" value="0"></label><div id="gcr"></div><button class="bt s" type="button" onclick="S.gc.push(1);rows('gc')">+ Παιδί που έχει πεθάνει και άφησε παιδιά</button><p class="hint">Τα εγγόνια παίρνουν τη μερίδα του γονιού τους.</p></div></div>
+<div class="step"><div class="no">3</div><div class="sb"><b>Γονείς</b><div class="opt"><label><input type="checkbox" id="fa">Ζει ο πατέρας</label><label><input type="checkbox" id="mo">Ζει η μητέρα</label></div><p class="hint">Οι γονείς κληρονομούν μόνο όταν δεν υπάρχουν παιδιά ή εγγόνια.</p></div></div>
+<div class="step"><div class="no">4</div><div class="sb"><b>Αδέλφια</b><label>Αδέλφια που ζουν<input type="number" id="sb" min="0" max="30" value="0"></label><div id="ncr"></div><button class="bt s" type="button" onclick="S.nc.push(1);rows('nc')">+ Αδελφός/ή που έχει πεθάνει και άφησε παιδιά</button></div></div>
+<div class="step"><div class="no">5</div><div class="sb"><b>Άλλοι συγγενείς και αξία (προαιρετικά)</b><div class="opt"><label><input type="checkbox" id="ot">Υπάρχουν παππούδες ή άλλοι μακρινότεροι συγγενείς</label></div><p><label>Αξία περιουσίας σε €<input type="number" id="est" min="0" step="1000" style="width:150px"></label></p></div></div>
+<button class="bt" type="button" onclick="calc()">Υπολογισμός</button><button class="bt s" type="button" onclick="location.reload()">Καθαρισμός</button></section>
+<section class="panel" id="res" hidden><h2>Αποτέλεσμα</h2><div class="w" id="ro"></div><div id="rn"></div><button class="bt s np" onclick="window.print()">Εκτύπωση</button></section>
+<section class="panel"><h2>Πώς γίνεται ο υπολογισμός</h2>
+<p>Χωρίς διαθήκη, η περιουσία μοιράζεται με βάση τάξεις συγγενών (άρθρα 1813 έως 1824 ΑΚ). Μια τάξη αποκλείει τις επόμενες.</p>
+<h3>Πρώτη τάξη: παιδιά και απόγονοι</h3><p>Τα παιδιά μοιράζονται εξ ίσου. Αν ένα παιδί έχει πεθάνει, τη μερίδα του παίρνουν τα δικά του παιδιά.</p>
+<h3>Δεύτερη τάξη: γονείς, αδέλφια και τα παιδιά τους</h3><p>Καλούνται όταν δεν υπάρχουν απόγονοι. Γονείς και αδέλφια μοιράζονται με βάση τον αριθμό των προσώπων, αλλά κάθε γονέας παίρνει τουλάχιστον το ένα τέταρτο του μεριδίου της τάξης.</p>
+<h3>Ο επιζών σύζυγος</h3><p>Παίρνει το ένα τέταρτο όταν συντρέχει με παιδιά και το μισό με όλες τις άλλες τάξεις. Επιπλέον, ως εξαίρετο, του ανήκουν τα οικιακά αντικείμενα (έπιπλα, σκεύη κ.λπ.) που χρησιμοποιούσε (άρθρο 1820 ΑΚ).</p>
+<h3>Νόμιμη μοίρα</h3><p>Παιδιά, γονείς και σύζυγος έχουν δικαίωμα στο μισό της μερίδας που θα έπαιρναν χωρίς διαθήκη (άρθρο 1825 ΑΚ). Τα αδέλφια δεν έχουν νόμιμη μοίρα.</p></section>
+<section class="panel"><h2>Συχνές ερωτήσεις</h2>
+<details><summary>Τι σημαίνει εξ αδιαθέτου κληρονομιά;</summary><p>Σημαίνει κληρονομιά χωρίς ισχύουσα διαθήκη. Τότε ο νόμος ορίζει ποιος κληρονομεί και πόσο. Ισχύει και όταν η διαθήκη καλύπτει μόνο μέρος της περιουσίας.</p></details>
+<details><summary>Πόσο παίρνει ο σύζυγος;</summary><p>Το ένα τέταρτο αν υπάρχουν παιδιά ή εγγόνια. Το ένα δεύτερο αν υπάρχουν γονείς, αδέλφια ή άλλοι συγγενείς. Ολόκληρη την περιουσία αν δεν υπάρχει κανένας συγγενής των τάξεων που καλούνται.</p></details>
+<details><summary>Τι είναι η νόμιμη μοίρα;</summary><p>Είναι το κατώτατο μερίδιο που προστατεύεται από τον νόμο. Αν η διαθήκη το παραβιάζει, ο δικαιούχος μπορεί να ζητήσει να συμπληρωθεί.</p></details>
+<details><summary>Τι γίνεται αν ένα παιδί έχει πεθάνει πριν από τον γονιό;</summary><p>Τη θέση του παίρνουν τα δικά του παιδιά και μοιράζονται τη μερίδα που θα έπαιρνε εκείνο.</p></details>
+<details><summary>Ο υπολογιστής αρκεί για να μοιράσουμε την περιουσία;</summary><p>Όχι. Δίνει μόνο μια πρώτη εικόνα. Για την πραγματική διαδικασία χρειάζονται έγγραφα, προθεσμίες και φόροι που αλλάζουν, οπότε απευθύνσου σε συμβολαιογράφο, δικηγόρο ή λογιστή.</p></details>
+<details><summary>Τι δεν λαμβάνει υπόψη ο υπολογιστής;</summary><p>Διαθήκη, αποποίηση, αποκλήρωση, δωρεές προς τα παιδιά που συνυπολογίζονται, υιοθεσία, σύμφωνο συμβίωσης, χρέη της κληρονομιάς και συγγενείς τρίτης τάξης και πέρα.</p></details></section>
+<div class="alert"><b>Σημαντικό.</b> Το εργαλείο είναι ιδιωτικό και ενημερωτικό. Δεν ανήκει σε δημόσια υπηρεσία και δεν αποτελεί νομική συμβουλή. Ο νόμος ερμηνεύεται ανά περίπτωση. Έλεγξε το αποτέλεσμα με ειδικό πριν πάρεις αποφάσεις.</div>
+<section class="panel np"><h2>Δες και άλλα εργαλεία</h2><p><a href="../ylika-anakainisis/">Υπολογισμός υλικών ανακαίνισης</a> &middot; <a href="../">Όλα τα εργαλεία</a></p></section>
+</main>
+<footer><div class="wrap"><p>Πηγή κανόνων: Αστικός Κώδικας, άρθρα 1813 έως 1825.</p><p>Το εργαλείο τρέχει στη συσκευή σου και δεν στέλνει δεδομένα πουθενά.</p></div></footer>
+<script>
+const $=i=>document.getElementById(i),f=n=>n.toLocaleString('el-GR',{maximumFractionDigits:2}),S={gc:[],nc:[]};
+function rows(k){const t=k=='gc'?['Παιδί','εγγόνια']:['Αδελφός/ή','παιδιά'];$(k+'r').innerHTML=S[k].map((v,i)=>'<div class="row"><label>'+t[0]+' που έχει πεθάνει. Πόσα '+t[1]+' άφησε; <input type="number" min="1" max="30" value="'+v+'" onchange="S.'+k+'['+i+']=Math.max(1,+this.value||1)"></label><button class="bt s" type="button" onclick="S.'+k+'.splice('+i+',1);rows(\''+k+'\')">Αφαίρεση</button></div>').join('')}
+function calc(){const sp=document.querySelector('input[name=sp]:checked').value=='1',ch=+$('ch').value||0,fa=$('fa').checked?1:0,mo=$('mo').checked?1:0,sb=+$('sb').value||0,ot=$('ot').checked,est=+$('est').value||0,R=[],st=ch+S.gc.length;let notes=[];
+if(st>0){const u=(sp?.75:1)/st;if(sp)R.push(['Σύζυγος',.25]);for(let i=0;i<ch;i++)R.push(['Παιδί '+(i+1),u]);S.gc.forEach((n,i)=>{for(let j=0;j<n;j++)R.push(['Εγγόνι '+(j+1)+' (από παιδί που πέθανε, #'+(i+1)+')',u/n])})}
+else{const p=fa+mo,s=sb+S.nc.length;if(p+s>0){const pool=sp?.5:1,ps=p&&s?Math.max(1/(p+s),.25):p?1/p:0;if(sp)R.push(['Σύζυγος',.5]);if(fa)R.push(['Πατέρας',pool*ps]);if(mo)R.push(['Μητέρα',pool*ps]);if(s){const u=pool*(1-p*ps)/s;for(let i=0;i<sb;i++)R.push(['Αδελφός/ή '+(i+1),u]);S.nc.forEach((n,i)=>{for(let j=0;j<n;j++)R.push(['Ανίψι '+(j+1)+' (από αδελφό/ή που πέθανε, #'+(i+1)+')',u/n])})}if(ot)notes.push('Το ποσοστό των συγγενών τρίτης τάξης δεν υπολογίζεται εδώ.')}
+else if(sp){if(ot){R.push(['Σύζυγος',.5]);notes.push('Το υπόλοιπο 50% ανήκει σε συγγενείς επόμενων τάξεων (π.χ. παππούδες), που δεν υπολογίζονται εδώ.')}else R.push(['Σύζυγος',1])}
+else notes.push('Δεν δηλώθηκαν κληρονόμοι των δύο πρώτων τάξεων. Καλούνται μακρινότεροι συγγενείς ή, τελικά, το Δημόσιο.')}
+if(sp)notes.push('Ο σύζυγος παίρνει επιπλέον, ως εξαίρετο, τα οικιακά αντικείμενα που χρησιμοποιούσε (άρθρο 1820 ΑΚ).');
+if(!st&&fa+mo&&sb+S.nc.length)notes.push('Όταν συντρέχουν γονείς και αδέλφια, το ελάχιστο 1/4 ανά γονέα εφαρμόζεται στο μερίδιο της τάξης. Επιβεβαίωσέ το με ειδικό.');
+let h='<table><tr><th>Κληρονόμος</th><th class="n">Μερίδα</th><th></th><th class="n">Νόμιμη μοίρα</th>'+(est?'<th class="n">Ποσό €</th>':'')+'</tr>';
+R.forEach(r=>{const lp=r[0].startsWith('Αδελφ')||r[0].startsWith('Ανίψ')?0:r[1]/2;h+='<tr><td>'+r[0]+'</td><td class="n"><b>'+f(r[1]*100)+'%</b></td><td><div class="bar"><i style="width:'+Math.min(100,r[1]*100)+'%"></i></div></td><td class="n">'+(lp?f(lp*100)+'%':'-')+'</td>'+(est?'<td class="n">'+f(r[1]*est)+'</td>':'')+'</tr>'});
+h+='</table>';const t=R.reduce((a,r)=>a+r[1],0);
+$('ro').innerHTML=R.length?h:'';$('rn').innerHTML=(R.length?'<p class="ok">Σύνολο που υπολογίστηκε: '+f(t*100)+'%</p>':'')+notes.map(x=>'<div class="alert">'+x+'</div>').join('');$('res').hidden=false;$('res').scrollIntoView({behavior:'smooth'})}
+</script></body></html>
