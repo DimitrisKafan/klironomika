@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="el"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Δωρεάν εργαλεία για κληρονομιές και ανακαινίσεις | Υπολογιστές για ιδιοκτήτες</title>
-<meta name="description" content="Δωρεάν υπολογιστές για ιδιοκτήτες ακινήτων: υπολογισμός κληρονομικής μερίδας και υπολογισμός υλικών ανακαίνισης, χωρίς εγγραφή.">
+<title>Υπολογισμός ΦΠΑ: προσθήκη και αφαίρεση ΦΠΑ από ποσό | Δωρεάν υπολογιστής</title>
+<meta name="description" content="Δωρεάν υπολογιστής ΦΠΑ: βάλε το ποσό και τον συντελεστή και δες το καθαρό, το ΦΠΑ και το σύνολο. Προσθήκη και αφαίρεση ΦΠΑ.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Πώς βγάζω το ΦΠΑ από μια τελική τιμή;","acceptedAnswer":{"@type":"Answer","text":"Διαίρεσε την τελική τιμή με το 1 συν τον συντελεστή. Για 24% διαιρείς με 1,24. Η διαφορά είναι το ΦΠΑ."}},{"@type":"Question","name":"Γιατί δεν αφαιρώ απλώς το 24%;","acceptedAnswer":{"@type":"Answer","text":"Γιατί το ΦΠΑ υπολογίζεται πάνω στην καθαρή αξία και όχι στην τελική τιμή. Η αφαίρεση του 24% από το σύνολο δίνει λάθος αποτέλεσμα."}}]}</script>
 <style>
 :root{--bg:#eef1f5;--fg:#1b2733;--mut:#55636f;--card:#fff;--line:#c9d2db;--nv:#0b3d7a;--nv2:#e6eef8;--af:#fff;--ok:#0a6b3d;--in:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1620;--fg:#e8eef4;--mut:#9aabba;--card:#15212d;--line:#2b3c4b;--nv:#7db3ff;--nv2:#1a2b3d;--af:#06152a;--ok:#5fd394;--in:#0d1620}}
@@ -36,26 +37,46 @@ th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertic
 details{border:1px solid var(--line);margin:8px 0;background:var(--card)}summary{padding:12px 14px;cursor:pointer;font-weight:600;color:var(--nv)}details p{margin:0;padding:0 14px 14px}
 footer{background:var(--nv);color:var(--af);padding:20px 0;font-size:.9rem}footer p{margin:6px 0}
 @media print{header,.np,footer{display:none!important}body{background:#fff;color:#000}.panel{border:1px solid #999}}
+.mat{border:1px solid var(--line);margin:10px 0;background:var(--card)}
+.mh{display:flex;gap:10px;align-items:center;padding:12px 14px;font-weight:600;cursor:pointer;color:var(--nv);margin:0;font-size:1.05rem}
+.mh input{width:22px;height:22px;margin:0}
+.mb{display:none;padding:0 14px 14px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.mat.on .mb{display:grid}
+.mb label{color:var(--mut);font-size:.9rem}.mb input{width:100%;margin:3px 0 0;padding:8px;font:inherit;border:2px solid var(--line);background:var(--in);color:var(--fg);border-radius:4px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}.g input{width:100%;margin:3px 0 0;padding:9px;font:inherit;border:2px solid var(--line);background:var(--in);color:var(--fg);border-radius:4px}
+.pre{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
 header nav{margin-bottom:8px}header nav a{color:var(--af);margin-right:16px;font-size:.95rem;text-decoration:underline}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--nv);padding:18px;display:flex;flex-direction:column}
-.card h3{margin:0 0 6px;font-size:1.15rem;color:var(--nv)}.card p{margin:0 0 14px;flex:1}
-a.bt{display:inline-block;text-decoration:none;text-align:center}
+.ck{display:flex;gap:10px;align-items:flex-start;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer;color:var(--fg);font-size:1rem}
+.ck input{width:22px;height:22px;margin:2px 0 0;flex:none}.ck.d span{text-decoration:line-through;color:var(--mut)}
+select{width:100%;padding:11px;font:inherit;border:2px solid var(--line);background:var(--in);color:var(--fg);border-radius:4px;margin-top:6px}
+.pg{height:12px;background:var(--nv2);border-radius:6px;margin:8px 0}.pg i{display:block;height:100%;background:var(--ok);border-radius:6px;width:0}
+@media print{.ck input{width:16px;height:16px}}
+.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0}
+.big div{background:var(--nv2);border-left:5px solid var(--nv);padding:12px}.big small{display:block;color:var(--mut)}.big b{font-size:1.5rem;color:var(--nv)}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:8px 0}
+.g input[type=number]{width:100%;margin:4px 0 0}
+.pre{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
 </style></head><body>
-<header><div class="wrap"><h1>Πρακτικά εργαλεία για το σπίτι και την κληρονομιά</h1><p>Δωρεάν υπολογιστές, απλοί στη χρήση, χωρίς εγγραφή.</p></div></header>
+<header><div class="wrap"><nav><a href="../">Αρχική</a><a href="../kleronomika/">Κληρονομικά</a><a href="../ylika-anakainisis/">Υλικά ανακαίνισης</a><a href="../dikaiologitika-symvolaiografou/">Δικαιολογητικά</a><a href="../ypologismos-fpa/">ΦΠΑ</a></nav><h1>Υπολογισμός ΦΠΑ</h1><p>Πρόσθεσε ή αφαίρεσε ΦΠΑ από οποιοδήποτε ποσό, σε δευτερόλεπτα.</p></div></header>
 <main class="wrap">
-<section class="panel"><h2>Διάλεξε εργαλείο</h2>
-<div class="cards">
-<div class="card"><h3>Υπολογισμός κληρονομικής μερίδας</h3><p>Δες πόσο κληρονομεί ο καθένας όταν δεν υπάρχει διαθήκη, μαζί με τη νόμιμη μοίρα, με βάση τον Αστικό Κώδικα.</p><a class="bt" href="kleronomika/">Άνοιγμα εργαλείου</a></div>
-<div class="card"><h3>Υπολογισμός υλικών ανακαίνισης</h3><p>Πόσα πλακάκια, λίτρα χρώμα, σακιά σοβά και κυβικά μπετόν χρειάζεσαι, με φύρα και κόστος.</p><a class="bt" href="ylika-anakainisis/">Άνοιγμα εργαλείου</a></div>
-<div class="card"><h3>Τι να φέρω στον συμβολαιογράφο</h3><p>Λίστα εγγράφων ανά πράξη (αγοραπωλησία, δωρεά, κληρονομιά, διαθήκη), με τσεκάρισμα και εκτύπωση.</p><a class="bt" href="dikaiologitika-symvolaiografou/">Άνοιγμα εργαλείου</a></div>
-<div class="card"><h3>Υπολογισμός ΦΠΑ</h3><p>Πρόσθεσε ή αφαίρεσε ΦΠΑ από οποιοδήποτε ποσό και δες καθαρό, ΦΠΑ και σύνολο.</p><a class="bt" href="ypologismos-fpa/">Άνοιγμα εργαλείου</a></div>
-</div></section>
-<section class="panel"><h2>Γιατί να τα χρησιμοποιήσεις</h2>
-<p><b>Απλά:</b> συμπληρώνεις λίγα στοιχεία και παίρνεις αποτέλεσμα σε δευτερόλεπτα.</p>
-<p><b>Ιδιωτικά:</b> οι υπολογισμοί γίνονται στη συσκευή σου και δεν στέλνουμε δεδομένα πουθενά.</p>
-<p><b>Δωρεάν:</b> χωρίς εγγραφή και χωρίς κωδικούς.</p></section>
-<div class="alert"><b>Σημαντικό.</b> Τα εργαλεία είναι ενημερωτικά και δεν αποτελούν νομική ή τεχνική συμβουλή. Δεν ανήκουν σε δημόσια υπηρεσία. Για πραγματικές υποθέσεις απευθύνσου σε δικηγόρο, συμβολαιογράφο ή μηχανικό.</div>
+<section class="panel"><h2>Υπολόγισε το ΦΠΑ</h2>
+<div class="step"><div class="no">1</div><div class="sb"><b>Τι ξέρεις;</b><div class="opt"><label><input type="radio" name="d" value="a" checked onchange="c()">Ξέρω το ποσό χωρίς ΦΠΑ και θέλω το σύνολο</label><label><input type="radio" name="d" value="r" onchange="c()">Ξέρω το σύνολο με ΦΠΑ και θέλω το καθαρό</label></div></div></div>
+<div class="step"><div class="no">2</div><div class="sb"><b>Ποσό και συντελεστής</b><div class="g"><label>Ποσό (€)<input type="number" id="a" min="0" step="0.01" value="100" oninput="c()"></label><label>Συντελεστής ΦΠΑ (%)<input type="number" id="r" min="0" step="0.1" value="24" oninput="c()"></label></div>
+<div class="pre"><button class="bt s" onclick="sr(24)">24%</button><button class="bt s" onclick="sr(13)">13%</button><button class="bt s" onclick="sr(6)">6%</button><button class="bt s" onclick="sr(0)">0%</button></div>
+<p class="hint">Οι συντελεστές ορίζονται από τον νόμο και μπορεί να αλλάζουν ή να διαφέρουν ανά προϊόν και περιοχή. Έλεγξε τον σωστό συντελεστή στην ΑΑΔΕ ή με τον λογιστή σου.</p></div></div>
+<div class="step"><div class="no">3</div><div class="sb"><b>Αποτέλεσμα</b><div class="big"><div><small>Καθαρή αξία</small><b id="n">-</b></div><div><small>ΦΠΑ</small><b id="v">-</b></div><div><small>Σύνολο με ΦΠΑ</small><b id="t">-</b></div></div></div></div></section>
+<section class="panel"><h2>Πώς γίνεται ο υπολογισμός</h2><p><b>Από καθαρό σε σύνολο:</b> καθαρό x (1 + συντελεστής). Π.χ. 100 € με 24% γίνονται 124 €.</p><p><b>Από σύνολο σε καθαρό:</b> σύνολο / (1 + συντελεστής). Π.χ. 124 € με 24% είναι 100 € καθαρά και 24 € ΦΠΑ.</p></section>
+<section class="panel"><h2>Συχνές ερωτήσεις</h2>
+<details><summary>Πώς βγάζω το ΦΠΑ από μια τελική τιμή;</summary><p>Διαίρεσε την τελική τιμή με το 1 συν τον συντελεστή. Για 24% διαιρείς με 1,24. Η διαφορά ανάμεσα στην τελική τιμή και το αποτέλεσμα είναι το ΦΠΑ.</p></details>
+<details><summary>Γιατί δεν αφαιρώ απλώς το 24%;</summary><p>Γιατί το ΦΠΑ υπολογίζεται πάνω στην καθαρή αξία και όχι στην τελική τιμή. Αν αφαιρέσεις 24% από 124 €, βγάζεις 94,24 € και όχι 100 €.</p></details>
+<details><summary>Τι είναι ο συντελεστής ΦΠΑ;</summary><p>Είναι το ποσοστό που προστίθεται στην καθαρή αξία ενός προϊόντος ή μιας υπηρεσίας. Διαφέρει ανά κατηγορία και μπορεί να αλλάξει από τον νόμο.</p></details>
+<details><summary>Ισχύει για τιμολόγια και αποδείξεις;</summary><p>Ναι. Για τα επίσημα παραστατικά όμως, τα ποσά που γράφονται εκεί είναι αυτά που ισχύουν. Για φορολογικά θέματα ρώτα τον λογιστή σου.</p></details></section>
+<div class="alert"><b>Σημαντικό.</b> Το εργαλείο είναι ενημερωτικό και δεν αντικαθιστά τον λογιστή σου. Ο σωστός συντελεστής εξαρτάται από το προϊόν ή την υπηρεσία.</div>
+<section class="panel np"><h2>Δες και άλλα εργαλεία</h2><p><a href="../">Όλα τα εργαλεία</a> &middot; <a href="../ypologismos-fpa/">Υπολογισμός ΦΠΑ</a> &middot; <a href="../ylika-anakainisis/">Υλικά ανακαίνισης</a></p></section>
 </main>
-<footer><div class="wrap"><p>Ιδιωτική πρωτοβουλία. Οι υπολογισμοί είναι ενδεικτικοί. <a href="sxetika/" style="color:inherit">Σχετικά και πολιτική απορρήτου</a></p></div></footer>
-</body></html>
+<footer><div class="wrap"><p>Οι υπολογισμοί γίνονται στη συσκευή σου. Ενδεικτικά αποτελέσματα. <a href="../sxetika/" style="color:inherit">Σχετικά και απόρρητο</a></p></div></footer>
+<script>
+const $=i=>document.getElementById(i),e=n=>n.toLocaleString('el-GR',{style:'currency',currency:'EUR'});
+function sr(x){$('r').value=x;c()}
+function c(){const a=parseFloat($('a').value)||0,r=(parseFloat($('r').value)||0)/100,m=document.querySelector('input[name=d]:checked').value;let n,t;if(m=='a'){n=a;t=a*(1+r)}else{t=a;n=a/(1+r)}$('n').textContent=e(n);$('t').textContent=e(t);$('v').textContent=e(t-n)}
+c();
+</script></body></html>
